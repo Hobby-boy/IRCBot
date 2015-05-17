@@ -7,6 +7,7 @@ server = "irc.esper.net"
 port = 6667
 channel = "#Epic"
 botnick = "Hobbybot"
+prefix = ","
 
 
 def main():
@@ -34,28 +35,31 @@ def main():
                 irc.send("JOIN " + channel + "\r\n")
             # elif len(msg) > 2 and msg[2].count("End of message of the day."):
             #                               irc.send("JOIN "+ channel +"\r\n")
-        if recvd.find(':,about') != -1:
+        if recvd.find(':' + prefix + 'about') != -1:
             irc.send("PRIVMSG " + channel + " :This is my very basic IRC bot, which doesn't have much functionality. This is a work in progress.\r\n")
 
-        if recvd.find(':,help') != -1:
+        if recvd.find(':' + prefix + 'help') != -1:
             irc.send("PRIVMSG " + channel + " :Current commands: ,about, ,help, ,info, ,test, ,version\r\n")
 
-        if recvd.find(':,test') != -1:
+        if recvd.find(':' + prefix + 'test') != -1:
             irc.send("PRIVMSG " + channel + " :It works! (just)\r\n")
 
-        if recvd.find(':,info') != -1:
+        if recvd.find(':' + prefix + 'info') != -1:
             irc.send("PRIVMSG " + channel + " :This bot is really buggy, and I have no idea what I am doing\r\n")
 
-        if recvd.find(':,version') != -1:
+        if recvd.find(':' + prefix + 'version') != -1:
             irc.send("PRIVMSG " + channel + " :Very alpha. I need to rewrite parts of it, and port to Python 3.\r\n")
+			
+        if recvd.find(':' + prefix + 'code') != -1:
+            irc.send("PRIVMSG " + channel + " :The source code is at: https://github.com/Hobby-boy/IRCBot \r\n")
 
-        if recvd.find(':,whoami') != -1:
+        if recvd.find(':' + prefix + 'whoami') != -1:
             irc.send("PRIVMSG " + channel + " :You are \r\n")
 
-        if recvd.find(':,quit') != -1:
+        if recvd.find(':' + prefix + 'quit') != -1:
             irc.send("PRIVMSG " + channel + " :Goodbye!\r\n")
             irc.send("QUIT :Leaving")
-            time.sleep(5)
+            time.sleep(2)
             exit()
 
 
