@@ -41,7 +41,7 @@ def main():
         if recvd.find(':' + prefix + 'help') != -1:
             irc.send("PRIVMSG " + channel + " :Current commands: ,about, ,help, ,info, ,test, ,version\r\n")
 
-        if recvd.find(':' + prefix + 'test') != -1:
+        if recvd.find(':' + prefix + 'test\r\n') != -1:
             irc.send("PRIVMSG " + channel + " :It works! (just)\r\n")
 
         if recvd.find(':' + prefix + 'info') != -1:
@@ -55,6 +55,12 @@ def main():
 
         if recvd.find(':' + prefix + 'whoami') != -1:
             irc.send("PRIVMSG " + channel + " :You are \r\n")
+            
+        if recvd.find(':' + prefix + 'action') != -1:
+            irc.send("PRIVMSG " + channel + " :\x01ACTION Test\001\r\n")
+            
+        if recvd.find(':' + prefix + 'ctcptest') != -1:
+            irc.send("PRIVMSG " + channel + " :\x01Test\001\r\n")
 
         if recvd.find(':' + prefix + 'quit') != -1:
             irc.send("PRIVMSG " + channel + " :Goodbye!\r\n")
